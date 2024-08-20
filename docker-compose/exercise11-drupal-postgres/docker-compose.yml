@@ -1,0 +1,26 @@
+version: '3'
+services:
+  drupal:
+    container_name: mydrupal
+    volumes:
+      - drupal-html:/var/www/html
+    image: drupal:8-apache
+    ports:
+      - 80:80
+    networks:
+      - net
+  postgres:
+    container_name: mypostgres
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: drupal
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    networks:
+      - net
+volumes:
+  drupal-html:
+networks:
+  net:
+
+# sudo docker compose -f docker-compose-drupal.yml up -d

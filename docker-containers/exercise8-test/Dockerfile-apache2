@@ -1,0 +1,26 @@
+FROM debian:11
+
+LABEL description="image with apache2 and php7.4 in Debian11"
+
+RUN \
+        apt update -y && \
+        apt install -y apache2 php libapache2-mod-php
+
+RUN \
+	apt install -y software-properties-common ca-certificates lsb-release apt-transport-https && \
+	sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list' && \
+	apt install -y php
+RUN echo "<?php phpinfo(); ?>" > /var/www/html/hello.php
+
+EXPOSE 80 8000
+
+CMD apachectl -DFOREGROUND
+
+
+# sudo docker build -t apache:php -f Dockerfile-apache2 .
+# sudo docker run -d --name test-apache -p 5555:80 -m "50mb" --cpuset-cpus 0 -e "ENV=dev" -e "VIRTUALIZATION=docker" apache:php8
+
+
+# sudo docker run -d --name test1 -m "50mb" --cpuset-cpus 0 -e "ENV=dev" -e "VIRTUALIZATION=docker" -p 5555:80 apache:phpX
+# sudo docker run -d --name test3 -m "100mb" --cpuset-cpus 0,1 -e "ENV=stg" -e "VIRTUALIZATION=docker" -e "TYPE=container" -p 8082:80 apache:phpX
+

@@ -1,0 +1,15 @@
+version: '3'
+services:
+  web:
+    container_name: my-nginx
+    image: nginx
+    ports:
+      - "8080:80"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
+        reservations:
+          cpus: '0.25'
+          memory: 20M

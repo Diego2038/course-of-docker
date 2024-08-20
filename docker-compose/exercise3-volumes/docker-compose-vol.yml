@@ -1,0 +1,15 @@
+version: '3'
+services:
+  web:
+    image: nginx
+    container_name: my-nginx
+    ports:
+      - "8080:80"
+    environment:
+      - mykey=value
+    env_file: common.env
+    volumes:
+      - "my-vol2:/usr/share/nginx/html"
+
+volumes:
+  my-vol2:

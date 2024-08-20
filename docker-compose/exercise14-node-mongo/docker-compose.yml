@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  reaction:
+    image: reactioncommerce/reaction
+    networks:
+      - net
+    depends_on:
+      - mongo
+    ports:
+      - "3000:3000"
+    environment:
+      ROOT_URL: "http://localhost"
+      MONGO_URL: "mongodb://mongodb:27017/reaction"
+      STORE_URL: "http://localhost"
+  mongo:
+    image: mongo:4.2
+    volumes:
+      - $PWD/data:/data/db
+    command: mongod --storageEngine=wiredTiger
+    networks:
+      - net
+networks:
+  net:

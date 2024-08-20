@@ -1,0 +1,12 @@
+version: '3'
+services:
+  web:
+    image: nginx
+    container_name: my-nginx
+    ports:
+      - "8080:80"
+    environment:
+      - mykey=value
+    env_file: common.env
+    volumes:
+      - "/home/diego/docker-images/docker-compose/exercise3-volumes/html:/usr/share/nginx/html"

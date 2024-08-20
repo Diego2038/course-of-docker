@@ -1,0 +1,8 @@
+version: '3'
+services:
+  web:
+    image: custom-image
+    container_name: any-name
+    build:
+      context: .
+      dockerfile: Dockerfile1

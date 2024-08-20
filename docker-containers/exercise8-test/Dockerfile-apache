@@ -1,0 +1,16 @@
+FROM debian:11
+
+LABEL description="image with apache2 and php7.4 in Debian11"
+
+RUN \
+	apt update -y && \
+	apt install -y apache2 php libapache2-mod-php 
+
+RUN echo "<?php phpinfo(); ?>" > /var/www/html/hello.php
+
+EXPOSE 80 8000
+
+CMD apachectl -DFOREGROUND
+
+
+# sudo docker build -t apache:php -f Dockerfile-apache .
